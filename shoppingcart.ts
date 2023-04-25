@@ -18,7 +18,7 @@ let addItem = (item: shoppingItemsData): shoppingItemsData[] => {
 };
 let removeProduct = (name: string): shoppingItemsData[] => {
   console.log("Removing product", name, "from shopping cart");
-  shoppingItems = shoppingItems.filter(function (item) {
+  shoppingItems = shoppingItems.filter(item=> {
     return item.name !== name;
   });
   return shoppingItems;
@@ -30,7 +30,7 @@ let updateQuantity = (name: string, quantity: number): shoppingItemsData[] => {
     "by the quantity",
     quantity
   );
-  shoppingItems = shoppingItems.filter(function (item): number {
+  shoppingItems = shoppingItems.filter(item=>(): number {
     return (item.quantity = item.quantity + quantity);
   });
   return shoppingItems;
@@ -56,7 +56,7 @@ let clearItems = (): shoppingItemsData[] => {
   return shoppingItems;
 };
 let searchItem = (name: string): shoppingItemsData[] => {
-  shoppingItems.filter(function (item) {
+  shoppingItems.filter(item=> {
     if (item.name == name) {
       console.log(
         "Details of your searched item are by name of",
