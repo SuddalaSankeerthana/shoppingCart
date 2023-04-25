@@ -3,57 +3,90 @@ interface shoppingItemsData {
   quantity: number;
   price: number;
 }
-interface shoppingCart{
-    addItem(item: shoppingItemsData): void;
-    removeProduct(name: string): void;
-    updateQuantity(name:string,quantity:number):number;
-    getItems():void;
-    clearItems():void;
-    searchItem(name:string):void;
-
-}
-function addItem(item: shoppingItemsData): shoppingItemsData[] {
+let addItem = (item: shoppingItemsData): shoppingItemsData[] => {
   shoppingItems.push(item);
   console.log("Added new Item");
-  return shoppingItems
-}
-function removeProduct(name: string): void {
+  console.log(
+    "Name:",
+    item.name,
+    "\nQuantity:",
+    item.quantity,
+    "\n Price:",
+    item.price
+  );
+  return shoppingItems;
+};
+let removeProduct = (name: string): shoppingItemsData[] => {
+  console.log("Removing product", name, "from shopping cart");
   shoppingItems = shoppingItems.filter(function (item) {
     return item.name !== name;
-    console.log("Succesfully removed product!");
   });
-}
-function updateQuantity(name:string,quantity:number):void{
-  shoppingItems = shoppingItems.filter(function (item):number {
+  return shoppingItems;
+};
+let updateQuantity = (name: string, quantity: number): shoppingItemsData[] => {
+  console.log(
+    "Updating the quantity of product",
+    name,
+    "by the quantity",
+    quantity
+  );
+  shoppingItems = shoppingItems.filter(function (item): number {
     return (item.quantity = item.quantity + quantity);
-    console.log("Successfully updated the quantity!");
-    console.log("name: ",item.name,"\n Quantity: ",item.quantity)
   });
-}
-function getItems():void {
+  return shoppingItems;
+};
+let getItems = (): void => {
+  console.log("List of items are:");
   for (var i = 0; i < shoppingItems.length; i++) {
-    console.log("List of items are:")
-    console.log(shoppingItems[i].name);
+    console.log(
+      "Name:",
+      shoppingItems[i].name,
+      "\nQuantity:",
+      shoppingItems[i].quantity,
+      "\n Price:",
+      shoppingItems[i].price
+    );
   }
-}
-function clearItems():void{
-    shoppingItems=[]
-}
-function searchItem(name:string):void{
-    shoppingItems.filter(function(item){
-        if(item.name==name){
-            console.log("Details of your searched item are:\nName:",item.name,"\nQuantity:",item.quantity,"\n Price:",item.price);
-        }
-    });
-}
-var shoppingItems: shoppingItemsData[] = [
+  if (shoppingItems.length == 0) {
+    console.log("No items found");
+  }
+};
+let clearItems = (): shoppingItemsData[] => {
+  shoppingItems = [];
+  return shoppingItems;
+};
+let searchItem = (name: string): shoppingItemsData[] => {
+  shoppingItems.filter(function (item) {
+    if (item.name == name) {
+      console.log(
+        "Details of your searched item are by name of",
+        item.name,
+        "\nQuantity:",
+        item.quantity,
+        "\n Price:",
+        item.price
+      );
+    }
+  });
+  return shoppingItems;
+};
+{
+  var shoppingItems: shoppingItemsData[] = [
     { name: "A", quantity: 2, price: 250 },
     { name: "B", quantity: 2, price: 2000 },
   ];
-  addItem({name:"C",quantity:1,price:100})
-  getItems()
+  getItems();
+  addItem({ name: "C", quantity: 1, price: 100 });
+  console.log("After adding product")
+  getItems();
   removeProduct("B");
-  updateQuantity("C",2);
+  console.log("After removing product")
+  getItems();
+  updateQuantity("C", 2);
+  console.log("After updating the quantity")
   getItems();
   searchItem("C");
   clearItems();
+  console.log("Afte clearing the product list")
+  getItems();
+}
