@@ -25,12 +25,12 @@ let removeProduct = (name: string): shoppingItemsData[] => {
 };
 let updateQuantity = (name: string, quantity: number): shoppingItemsData[] => {
   console.log(
-    "Updating the quantity of product",
+    "Updating the quantity of product....",
     name,
     "by the quantity",
     quantity
   );
-  shoppingItems = shoppingItems.filter(item=>(): number {
+  shoppingItems = shoppingItems.filter(item=>{
     return (item.quantity = item.quantity + quantity);
   });
   return shoppingItems;
@@ -43,12 +43,12 @@ let getItems = (): void => {
       shoppingItems[i].name,
       "\nQuantity:",
       shoppingItems[i].quantity,
-      "\n Price:",
+      "\nPrice:",
       shoppingItems[i].price
     );
   }
   if (shoppingItems.length == 0) {
-    console.log("No items found");
+    console.log("No items found !");
   }
 };
 let clearItems = (): shoppingItemsData[] => {
@@ -63,13 +63,21 @@ let searchItem = (name: string): shoppingItemsData[] => {
         item.name,
         "\nQuantity:",
         item.quantity,
-        "\n Price:",
+        "\nPrice:",
         item.price
       );
     }
   });
   return shoppingItems;
 };
+let totalPrice=(shoppingItems:shoppingItemsData[]):number=>{
+  console.log("Caluculating Total price....")
+  let sumAmount=0;
+  for (var i = 0; i < shoppingItems.length; i++) {
+   sumAmount=sumAmount+shoppingItems[i].price*shoppingItems[i].quantity;
+}
+return sumAmount}
+
 {
   var shoppingItems: shoppingItemsData[] = [
     { name: "A", quantity: 2, price: 250 },
@@ -85,8 +93,11 @@ let searchItem = (name: string): shoppingItemsData[] => {
   updateQuantity("C", 2);
   console.log("After updating the quantity")
   getItems();
+  var totalAmount=totalPrice(shoppingItems)
+  console.log("Total Price: ",totalAmount)
   searchItem("C");
   clearItems();
   console.log("Afte clearing the product list")
   getItems();
+
 }
